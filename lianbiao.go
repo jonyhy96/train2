@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"strconv"
+)
 
 type node struct {
 	data []string
@@ -8,12 +11,13 @@ type node struct {
 }
 
 func main() {
-	node := create_firstnode()        //create the first node
-	add_node(&node, 4, "hao")         //add nodes to the first node
-	insert_node(&node, 2, "second")   //insert a node to the linklist
-	delete_ndoe(&node, 2)             //delete a node from the link list
-	channge_node(&node, 2, "sencond") //change a node from the linklist
-	print_node(&node)                 //print out the link list
+	node := create_firstnode()       //create the first node
+	add_node(&node, 4, "hao")        //add nodes to the first node
+	insert_node(&node, 2, "second")  //insert a node to the linklist
+	delete_ndoe(&node, 2)            //delete a node from the link list
+	channge_node(&node, 2, "second") //change a node from the linklist
+	print_node(&node)                //print out the link list
+	search_node(&node, "seco")       //check wether the data is in the list
 }
 func create_firstnode() node {
 	var firstnode node
@@ -84,4 +88,22 @@ func loop_node(currentnode *node, index int) *node {
 		break
 	}
 	return currentnode
+}
+func search_node(currentnode *node, data string) {
+	index := 0
+	var olddata string
+	for currentnode.next != nil {
+		olddata = currentnode.data[0]
+		if olddata == data {
+			string := strconv.Itoa(index)
+			fmt.Println("find! the index is " + string)
+			break
+		} else {
+			currentnode = currentnode.next
+			index++
+		}
+	}
+	if currentnode.next == nil {
+		fmt.Println("the data is not in the list")
+	}
 }
