@@ -12,17 +12,19 @@ func (s singleton) f() {
 }
 
 var once sync.Once
+var instance *singleton
 
 func getinstance(a int) *singleton {
-	var instance *singleton
 	once.Do(func() {
-		instance = &singleton{a}
+		if instance == nil {
+			instance = &singleton{a}
+		}
 	})
 	return instance
 }
 func main() {
 	instance := getinstance(3)
-	instance1 := getinstance(4)
+	instance1 := getinstance(5555)
 	instance.f()
 	instance1.f()
 }
