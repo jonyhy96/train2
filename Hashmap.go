@@ -52,7 +52,7 @@ func (hm *HashMap) insert(key int, data string) {
 	for p.next != nil {
 		p = p.next
 	}
-	//fmt.Println("start to insert data")
+	fmt.Println("start to insert data")
 	p.next = &newnode
 	newnode.next = nil
 	hm.size++
